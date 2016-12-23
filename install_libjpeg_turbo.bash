@@ -6,7 +6,6 @@
 # Go to the location from where you want to run this script
 cd /home/faiz89/git
 
-
 # libjpeg-turbo SDK itself has some dependencies
 # Make sure you have autoconf 2.56 or later, automake 1.7 or later, nasm or yasm, JDK or OpenJDK"
 
@@ -70,7 +69,7 @@ if [ ! -d /usr/local/encap/libjpeg-turbo-v1.5.2 ]; then
     set -ex
     sudo mkdir /usr/local/encap/libjpeg-turbo-v1.5.2
     # Change file permissions
-    sudo chown faiz89:faiz89 /usr/local/encap/libjpeg-turbo-v1.5.2 
+    sudo chown -R faiz89:faiz89 /usr/local/encap/libjpeg-turbo-v1.5.2 
 fi
 sh ../../libjpeg-turbo/configure JNI_CFLAGS="-I$JNI_DIR -I$JNI_DIR/linux"\
     --with-pic --with-java --prefix=/usr/local/encap/libjpeg-turbo-v1.5.2
