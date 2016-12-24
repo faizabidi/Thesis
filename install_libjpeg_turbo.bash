@@ -10,7 +10,7 @@ cd /home/faiz89/git
 # Make sure you have autoconf 2.56 or later, automake 1.7 or later, nasm or yasm, JDK or OpenJDK"
 
 # Check if autoconf is installed
-AUTOCONF="$(locate bin/autoconf)"
+AUTOCONF="$(whereis autoconf)"
 if [ -z "$AUTOCONF" ]; then
     set -ex # Exit error and echo the command
     echo "Installing autoconf..."
@@ -21,7 +21,7 @@ else
 fi
 
 # Check if automake is installed
-AUTOMAKE="$(locate bin/automake)"
+AUTOMAKE="$(whereis automake)"
 if [ -z "$AUTOMAKE" ]; then
     set -ex
     echo "Installing automake..."
@@ -32,8 +32,8 @@ else
 fi
 
 # Check if yasm or nasm installed
-NASM="$(locate bin/nasm)"
-YASM="$(locate bin/yasm)"
+NASM="$(whereis nasm)"
+YASM="$(whereis yasm)"
 if [ -z "$NASM" ] && [ -z "$YASM" ]; then
     set -ex
     echo "Installing yasm...."
@@ -77,7 +77,7 @@ autoreconf -fiv
 mkdir build01 && cd build01
 set +ex
 # Find the path of JNI_CFLAGS
-JNI_H="$(locate include/jni.h)"
+JNI_H="$(sudo find /usr/lib -name "jni.h")"
 JNI_DIR=$(dirname "${JNI_H}")
 # Install it in /usr/local/encap/libjpeg-turbo-v1.5.2
 # Create folder if not exists
