@@ -44,7 +44,7 @@ if [ -z "%JDK" ]; then
 fi
 
 # Check if there already is a git repo downloaded in ~/git
-LIBJPEG=$"(ls | grep libjpeg-turbo)"
+LIBJPEG="$(ls | grep libjpeg-turbo)"
 if [ -z "%LIBJPEG" ]; then
     set -ex
     # Clone the libjpeg-turbo SDK repo from GitHub
