@@ -1,0 +1,3 @@
+Scripts in this folder basically help managing the VNC servers on
+viz1.sv.vt.edu and starting 8 VNC viewers in the CAVE on 8 different
+displays.
