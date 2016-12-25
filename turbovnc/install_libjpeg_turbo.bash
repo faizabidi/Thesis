@@ -15,7 +15,7 @@ sudo yum install pam-devel -y
 set +ex
 
 # Check if there already is a git repo downloaded in ~/git
-TURBOVNC=$"(ls /home/faiz89/git | grep turbovnc)"
+TURBOVNC="$(ls /home/faiz89/git | grep turbovnc)"
 if [ -z "$TURBOVNC" ]; then
     set -ex
     echo "Cloning turbovnc from GitHub..."
