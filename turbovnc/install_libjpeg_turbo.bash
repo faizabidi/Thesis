@@ -10,13 +10,15 @@ cd /home/faiz89/git
 
 # Need to install pam for TurboVNC server
 set -ex
+echo "Checking if pam-devel already installed..."
 sudo yum install pam-devel -y
 set +ex
 
 # Check if there already is a git repo downloaded in ~/git
 TURBOVNC=$"(ls /home/faiz89/git | grep turbovnc)"
-if [ -z "%TURBOVNC" ]; then
+if [ -z "$TURBOVNC" ]; then
     set -ex
+    echo "Cloning turbovnc from GitHub..."
     # Clone the turbovnc repo from GitHub
     git clone https://github.com/TurboVNC/turbovnc.git
     set +ex
