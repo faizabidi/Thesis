@@ -3,6 +3,21 @@
 # To install TurboVNC, we need to install some dependencies first
 # The first one is libjpeg-turbo SDK - https://github.com/libjpeg-turbo/libjpeg-turbo
 
+# Check operating system first
+if [ -f /etc/lsb-release ]; then
+    . /etc/lsb-release
+    DISTRO=$DISTRIB_ID
+elif [ -f /etc/debian_version ]; then
+    DISTRO=Debian
+    # XXX or Ubuntu
+elif [ -f /etc/redhat-release ]; then
+    DISTRO="Red Hat"
+    # XXX or CentOS or Fedora
+else
+    DISTRO=$(uname -s)
+fi
+
+
 # Go to the location from where you want to run this script
 cd /home/faiz89/git
 
@@ -14,7 +29,11 @@ AUTOCONF="$(whereis autoconf)"
 if [ -z "$AUTOCONF" ]; then
     set -ex # Exit error and echo the command
     echo "Installing autoconf..."
-    sudo yum install autoconf -y
+    if [ "$DISTRO" == "Red Hat" ]; then
+        sudo yum install autoconf -y
+    else
+        sudo apt-get install autoconf -y
+    fi
     set +ex # Unset the exit error and the echo command
 else
     echo "autoconf already installed. Not re-installing...."
@@ -25,7 +44,11 @@ AUTOMAKE="$(whereis automake)"
 if [ -z "$AUTOMAKE" ]; then
     set -ex
     echo "Installing automake..."
-    sudo yum install automake -y
+    if [ "$DISTRO" == "Red Hat" ]; then
+        sudo yum install automake -y
+    else
+        sudo apt-get install automake -y
+    fi
     set +ex
 else
     echo "automake already installed. Not re-installing..."
@@ -37,19 +60,27 @@ YASM="$(whereis yasm)"
 if [ -z "$NASM" ] && [ -z "$YASM" ]; then
     set -ex
     echo "Installing yasm...."
-    sudo yum install yasm -y
+    if [ "$DISTRO" == "Red Hat" ]; then
+        sudo yum install yasm -y
+    else
+        sudo apt-get install yasm -y
+    fi
     set +ex 
 else
     echo "yasm or nasm or both already installed. Not re-installing..."
 fi
 
 # Check if JDK or openjdk is installed
-JDK="$(java -version 2>&1 | grep jdk)"
-if [ -z "$JDK" ]; then
+JDK_VERSION=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}')
+if [ "$JDK_VERSION" != "1.8.0_111" ]; then
     set -ex
     echo "Installing openjdk version 1.8.0...."
-    sudo yum install java-1.8.0-openjdk -y
-    sudo yum install java-1.8.0-openjdk-devel -y
+    if [ "$DISTRO" == "Red Hat" ]; then
+        sudo yum install java-1.8.0-openjdk -y
+        sudo yum install java-1.8.0-openjdk-devel -y
+    else
+        sudo apt-get install default-jdk -y
+    fi
     set +ex
 else
     echo "JDK already installed. Not re-installing...."
