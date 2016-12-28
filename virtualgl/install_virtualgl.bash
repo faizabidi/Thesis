@@ -51,12 +51,12 @@ fi
 # Assuming it is in /usr/local/include/turbojpeg.h
 TURBOJPEG="/usr/local/include"
 
-# Install it in /usr/local/encap/turbovnc-v2.1.1
+# Install it in /usr/local/encap/virtualgl-v3.1
 # Create folder if not exists
 if [ ! -d /usr/local/encap/virtualgl-v3.1 ]; then
-    sudo mkdir /usr/local/encap/virtualgl-v3.1
+    mkdir /usr/local/encap/virtualgl-v3.1
     # Change file permissions
-    sudo chown -R faiz89:faiz89 /usr/local/encap/turbovnc-v2.1.1
+    sudo chown -R faiz89:faiz89 /usr/local/encap/virtualgl-v3.1
 fi
 
 # Configure
