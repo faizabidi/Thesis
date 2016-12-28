@@ -104,12 +104,19 @@ set -ex
 # Go to the source files
 cd libjpeg-turbo
 autoreconf -fiv
-# Make a build directory
-mkdir build01 && cd build01
+
+# Make a build directory if not exists
+if [ ! -d /home/faiz89/git/libjpeg-turbo/build01 ]; then
+    mkdir build01 && cd build01
+else
+    cd build01
+fi
 set +ex
+
 # Find the path of JNI_CFLAGS
 JNI_H="$(sudo find /usr/lib -name "jni.h" | sort | tail -n 1)"
 JNI_DIR=$(dirname "${JNI_H}")
+
 # Install it in /usr/local/encap/libjpeg-turbo-v1.5.2
 # Create folder if not exists
 if [ ! -d /usr/local/encap/libjpeg-turbo-v1.5.2 ]; then
@@ -118,15 +125,21 @@ if [ ! -d /usr/local/encap/libjpeg-turbo-v1.5.2 ]; then
     # Change file permissions
     sudo chown -R faiz89:faiz89 /usr/local/encap/libjpeg-turbo-v1.5.2 
 fi
+
+# Configure
 sh ../../libjpeg-turbo/configure JNI_CFLAGS="-I$JNI_DIR -I$JNI_DIR/linux"\
     --with-pic --with-java --prefix=/usr/local/encap/libjpeg-turbo-v1.5.2
+
 # Set encoding to UTF8 else the make may fail complaining of non-ASCII
 # characters
 export JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF8
+
 # Make the file
 make -j 4
 set +ex
 
 # Finally, install libjpeg-turbo here
 make install
+
+echo "Now run sudo encap to install it using the encap project."
 
