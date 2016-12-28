@@ -108,7 +108,7 @@ autoreconf -fiv
 mkdir build01 && cd build01
 set +ex
 # Find the path of JNI_CFLAGS
-JNI_H="$(sudo find /usr/lib -name "jni.h")"
+JNI_H="$(sudo find /usr/lib -name "jni.h" | sort | tail -n 1)"
 JNI_DIR=$(dirname "${JNI_H}")
 # Install it in /usr/local/encap/libjpeg-turbo-v1.5.2
 # Create folder if not exists
