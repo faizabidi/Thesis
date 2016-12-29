@@ -19,6 +19,13 @@ else
     DISTRO=$(uname -s)
 fi
 
+# Need to install freeglut library
+if [ $DISTRO == "Red Hat" ]; then
+    sudo yum install mesa-libGL-devel mesa-libGLU-devel
+else
+    sudo apt-get install libglu-dev
+fi
+
 # Go to the location from where you want to run this script
 cd /home/faiz89/git
 
