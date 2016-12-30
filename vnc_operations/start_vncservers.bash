@@ -14,7 +14,7 @@ KILL_VNCSERVER="pkill -f vnc"
 
 ssh $SERVER "$KILL_VNCSERVER"
 
-START_VNCSERVER="vncserver -geometry 12560x1600"
+START_VNCSERVER="vncserver -geometry 2560x1600"
 set -ex
 for i in {1..8}; do
     if echo $START_VNCSERVER :$i | ssh $SERVER bash; then
