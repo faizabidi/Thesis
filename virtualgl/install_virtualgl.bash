@@ -21,9 +21,9 @@ fi
 
 # Need to install freeglut library
 if [ $DISTRO == "Red Hat" ]; then
-    sudo yum install mesa-libGL-devel mesa-libGLU-devel
+    sudo yum install mesa-libGL-devel mesa-libGLU-devel -y
 else
-    sudo apt-get install libglu-dev
+    sudo apt-get install libglu-dev -y
 fi
 
 # Go to the location from where you want to run this script
