@@ -11,13 +11,16 @@ SERVER=$1
 
 # First, kill all existing vncservers on $SERVER
 KILL_VNCSERVER="pkill -f vnc"
-
 ssh $SERVER "$KILL_VNCSERVER"
+
+# Export the path
+EXPORT_PATH="export LD_LIBRARY_PATH=/usr/local/lib"
+#ssh $SERVER "$EXPORT_PATH"
 
 START_VNCSERVER="vncserver -geometry 2560x1600"
 set -ex
 for i in {1..8}; do
-    if echo $START_VNCSERVER :$i | ssh $SERVER bash; then
+    if ssh $SERVER "$EXPORT_PATH && $START_VNCSERVER"; then
         echo "VNC server successfully started on $SERVER:$i"
     else
         echo "Failed to start VNC server on $SERVER:$i"
