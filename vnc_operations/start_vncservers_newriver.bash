@@ -15,3 +15,4 @@ for i in {1..8}; do
 		echo "Failed to start VNC server on display port $i"
 	fi
 done
+
