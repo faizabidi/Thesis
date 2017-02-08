@@ -12,6 +12,6 @@ for i in {1..8}; do
 	if $START_VNCSERVER :$i; then
 		echo "VNC server successfully started on display port $i"
 	else
-        	echo "Failed to start VNC server on display port $i"
+		echo "Failed to start VNC server on display port $i"
 	fi
 done
