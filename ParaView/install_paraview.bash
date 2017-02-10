@@ -39,6 +39,7 @@ if cmake \
     -DPARAVIEW_ENABLE_PYTHON:BOOL=ON \
     -DPARAVIEW_USE_MPI:BOOL=ON \
     -DPARAVIEW_USE_VRPN:BOOL=ON \
+	-DBUILD_TESTING:BOOL=OFF \
     ../../ParaView; then
 echo "ParaView compiled successfully."
 else
