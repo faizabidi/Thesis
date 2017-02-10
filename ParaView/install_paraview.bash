@@ -43,7 +43,7 @@ if cmake \
     ../../ParaView; then
 echo "ParaView compiled successfully."
 else
-	"ParaView compilation unsuccessful."
+    "ParaView compilation unsuccessful."
 fi
 
 make -j 8
