@@ -6,6 +6,22 @@
 # c) Qt
 # d) Python
 
+# Go to the location from where you want to run this script
+cd ~/git
+
+# ParaView source is available on GitHub
+git clone https://github.com/Kitware/ParaView.git
+
+# Checkout the version you want
+# We want v5.2.0
+git checkout v5.2.0
+
+# Update the submodule
+git submodule update
+
+# Go the the source files and create a build directory in it
+cd ParaView && mkdir build-v5.2.0 && cd build-v5.2.0
+
 set -ex
 if cmake \
     -DCMAKE_BUILD_TYPE=Release \
