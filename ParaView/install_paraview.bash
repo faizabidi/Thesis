@@ -17,7 +17,7 @@ git clone https://github.com/Kitware/ParaView.git
 git checkout v5.2.0
 
 # Update the submodule
-git submodule update
+git submodule update --init
 
 # Go the the source files and create a build directory in it
 cd ParaView && mkdir build-v5.2.0 && cd build-v5.2.0
@@ -26,7 +26,7 @@ set -ex
 if cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DBUILD_SHARED_LIBS:BOOL=ON \
-    -DCMAKE_INSTALL_PREFIX=/usr/local/encap/paraview-5.2.0 \
+    -DCMAKE_INSTALL_PREFIX=/usr/local/encap/paraview-v5.2.0 \
     -DPARAVIEW_AUTOLOAD_PLUGIN_VRPlugin:BOOL=ON \
     -DPARAVIEW_BUILD_PLUGIN_VRPlugin:BOOL=ON \
     -DPARAVIEW_ENABLE_PYTHON:BOOL=ON \
