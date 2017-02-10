@@ -9,8 +9,15 @@
 # Go to the location from where you want to run this script
 cd ~/git
 
-# ParaView source is available on GitHub
-git clone https://github.com/Kitware/ParaView.git
+# Check if there already is a git repo downloaded in ~/git
+PARAVIEW="$(ls /home/faiz89/git | grep ParaView)"
+if [ -z "$PARAVIEW" ]; then
+	set -ex
+	echo "Cloning ParaView from GitHub..."
+	# Clone the paraview repo from GitHub
+	git clone https://github.com/Kitware/ParaView.git
+	set +ex
+fi
 
 # Checkout the version you want
 # We want v5.2.0
