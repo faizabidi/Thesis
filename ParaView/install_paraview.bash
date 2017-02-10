@@ -34,6 +34,9 @@ if cmake \
     -DPARAVIEW_USE_VRPN:BOOL=ON \
     ../../ParaView; then
 echo "ParaView compiled successfully."
+else
+	"ParaView compilation unsuccessful."
+fi
 
 make -j 8
 
