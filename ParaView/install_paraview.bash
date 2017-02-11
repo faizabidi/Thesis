@@ -10,7 +10,7 @@
 cd ~/git
 
 # Check if there already is a git repo downloaded in ~/git
-PARAVIEW="$(ls /home/faiz89/git | grep ParaView)"
+PARAVIEW="$(ls /home/faiz89/git | grep -w ParaView)"
 if [ -z "$PARAVIEW" ]; then
 	set -ex
 	echo "Cloning ParaView from GitHub..."
