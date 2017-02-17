@@ -4,6 +4,9 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
+# Kill all existing vncviewers
+ps -ef | grep VncViewer | awk '{print $2}' | xargs kill
+
 SERVER=$1
 
 for i in {0..14..2};do
