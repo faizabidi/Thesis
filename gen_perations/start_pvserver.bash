@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Kill any existing running pvservers
-pkill pvserver
+#pkill pvserver
 
 # Start 8 new pvservers
 mpiexec -np 8 \
