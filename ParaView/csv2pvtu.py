@@ -1,51 +1,39 @@
+import sys
 #### import the simple module from the paraview
 from paraview.simple import *
 #### disable automatic camera reset on 'Show'
 paraview.simple._DisableFirstRenderCameraReset()
 
-# set active view
-SetActiveView(None)
+script, FILENAME = sys.argv
 
-CreateLayout('Layout #1')
+# create a new 'CSV Reader'
+a1lakhcsv = CSVReader(FileName=[FILENAME])
 
-# Create a new 'Render View'
-renderView1 = CreateView('RenderView')
-renderView1.ViewSize = [1205, 806]
-renderView1.AxesGrid = 'GridAxes3DActor'
-renderView1.StereoType = 0
-renderView1.Background = [0.32, 0.34, 0.43]
+# Properties modified on a1lakhcsv
+a1lakhcsv.HaveHeaders = 0
+a1lakhcsv.FieldDelimiterCharacters = ' '
+
+# Create a new 'SpreadSheet View'
+spreadSheetView2 = CreateView('SpreadSheetView')
+spreadSheetView2.ColumnToSort = ''
+spreadSheetView2.BlockSize = 1024L
+# uncomment following to set a specific view size
+# spreadSheetView2.ViewSize = [400, 400]
 
 # get layout
 layout1 = GetLayout()
 
 # place view in the layout
-layout1.AssignView(0, renderView1)
-
-# create a new 'CSV Reader'
-a10linescsv = CSVReader(FileName=['/home/faiz89/10lines.csv'])
-
-# Properties modified on a10linescsv
-a10linescsv.HaveHeaders = 0
-a10linescsv.FieldDelimiterCharacters = ' '
-
-# Create a new 'SpreadSheet View'
-spreadSheetView1 = CreateView('SpreadSheetView')
-spreadSheetView1.ColumnToSort = ''
-spreadSheetView1.BlockSize = 1024L
-# uncomment following to set a specific view size
-# spreadSheetView1.ViewSize = [400, 400]
-
-# place view in the layout
-layout1.AssignView(2, spreadSheetView1)
+layout1.AssignView(4, spreadSheetView2)
 
 # show data in view
-a10linescsvDisplay = Show(a10linescsv, spreadSheetView1)
+a1lakhcsvDisplay = Show(a1lakhcsv, spreadSheetView2)
 # trace defaults for the display properties.
-a10linescsvDisplay.FieldAssociation = 'Row Data'
-a10linescsvDisplay.CompositeDataSetIndex = [0]
+a1lakhcsvDisplay.FieldAssociation = 'Row Data'
+a1lakhcsvDisplay.CompositeDataSetIndex = [0]
 
 # create a new 'Table To Points'
-tableToPoints1 = TableToPoints(Input=a10linescsv)
+tableToPoints1 = TableToPoints(Input=a1lakhcsv)
 tableToPoints1.XColumn = 'Field 0'
 tableToPoints1.YColumn = 'Field 0'
 tableToPoints1.ZColumn = 'Field 0'
@@ -55,23 +43,23 @@ tableToPoints1.YColumn = 'Field 1'
 tableToPoints1.ZColumn = 'Field 2'
 
 # show data in view
-tableToPoints1Display = Show(tableToPoints1, spreadSheetView1)
+tableToPoints1Display = Show(tableToPoints1, spreadSheetView2)
 # trace defaults for the display properties.
 tableToPoints1Display.CompositeDataSetIndex = [0]
 
 # hide data in view
-Hide(a10linescsv, spreadSheetView1)
+Hide(a1lakhcsv, spreadSheetView2)
 
 # create a new 'Glyph'
 glyph1 = Glyph(Input=tableToPoints1,
     GlyphType='Arrow')
 glyph1.Scalars = ['POINTS', 'Field 3']
 glyph1.Vectors = ['POINTS', 'None']
-glyph1.ScaleFactor = 0.14907
+glyph1.ScaleFactor = 0.75536
 glyph1.GlyphTransform = 'Transform2'
 
 # Properties modified on glyph1.GlyphType
-glyph1.GlyphType.GlyphType = 'Vertex'
+#glyph1.GlyphType.GlyphType = 'Vertex'
 
 # Properties modified on glyph1
 glyph1.GlyphType = '2D Glyph'
@@ -80,27 +68,38 @@ glyph1.GlyphType = '2D Glyph'
 glyph1.GlyphType.GlyphType = 'Vertex'
 
 # show data in view
-glyph1Display = Show(glyph1, spreadSheetView1)
+glyph1Display = Show(glyph1, spreadSheetView2)
 # trace defaults for the display properties.
 glyph1Display.CompositeDataSetIndex = [0]
+
+# create a new 'Glyph'
+glyph2 = Glyph(Input=glyph1,
+    GlyphType='Arrow')
+glyph2.Scalars = ['POINTS', 'Field 3']
+glyph2.Vectors = ['POINTS', 'None']
+glyph2.ScaleFactor = 0.7527699947357178
+glyph2.GlyphTransform = 'Transform2'
+
+# set active source
+SetActiveSource(glyph1)
+
+# destroy glyph2
+Delete(glyph2)
+del glyph2
 
 # create a new 'D3'
 d31 = D3(Input=glyph1)
 
 # show data in view
-d31Display = Show(d31, spreadSheetView1)
+d31Display = Show(d31, spreadSheetView2)
 # trace defaults for the display properties.
 d31Display.CompositeDataSetIndex = [0]
 
 # hide data in view
-Hide(glyph1, spreadSheetView1)
+Hide(glyph1, spreadSheetView2)
 
 # save data
-SaveData('/home/faiz89/test4.pvtu', proxy=d31, DataMode='Binary')
-
-#### saving camera placements for all active views
-
-# current camera placement for renderView1
+SaveData('%s.pvtu' %FILENAME, proxy=d31, DataMode='Ascii')
 
 #### uncomment the following to render all views
 # RenderAllViews()
