@@ -7,11 +7,11 @@ paraview.simple._DisableFirstRenderCameraReset()
 script, FILENAME = sys.argv
 
 # create a new 'CSV Reader'
-a1lakhcsv = CSVReader(FileName=[FILENAME])
+reader = CSVReader(FileName=[FILENAME])
 
-# Properties modified on a1lakhcsv
-a1lakhcsv.HaveHeaders = 0
-a1lakhcsv.FieldDelimiterCharacters = ' '
+# Properties modified on reader
+reader.HaveHeaders = 0
+reader.FieldDelimiterCharacters = ' '
 
 # Create a new 'SpreadSheet View'
 spreadSheetView2 = CreateView('SpreadSheetView')
@@ -27,13 +27,13 @@ layout1 = GetLayout()
 layout1.AssignView(4, spreadSheetView2)
 
 # show data in view
-a1lakhcsvDisplay = Show(a1lakhcsv, spreadSheetView2)
+readerDisplay = Show(reader, spreadSheetView2)
 # trace defaults for the display properties.
-a1lakhcsvDisplay.FieldAssociation = 'Row Data'
-a1lakhcsvDisplay.CompositeDataSetIndex = [0]
+readerDisplay.FieldAssociation = 'Row Data'
+readerDisplay.CompositeDataSetIndex = [0]
 
 # create a new 'Table To Points'
-tableToPoints1 = TableToPoints(Input=a1lakhcsv)
+tableToPoints1 = TableToPoints(Input=reader)
 tableToPoints1.XColumn = 'Field 0'
 tableToPoints1.YColumn = 'Field 0'
 tableToPoints1.ZColumn = 'Field 0'
@@ -48,7 +48,7 @@ tableToPoints1Display = Show(tableToPoints1, spreadSheetView2)
 tableToPoints1Display.CompositeDataSetIndex = [0]
 
 # hide data in view
-Hide(a1lakhcsv, spreadSheetView2)
+Hide(reader, spreadSheetView2)
 
 # create a new 'Glyph'
 glyph1 = Glyph(Input=tableToPoints1,
