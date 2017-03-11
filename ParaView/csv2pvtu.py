@@ -1,30 +1,19 @@
-import sys
 #### import the simple module from the paraview
 from paraview.simple import *
 #### disable automatic camera reset on 'Show'
 paraview.simple._DisableFirstRenderCameraReset()
 
-script, FILENAME = sys.argv
-
 # create a new 'CSV Reader'
-a1lakhcsv = CSVReader(FileName=[FILENAME])
+a1lakhcsv = CSVReader(FileName=['/home/faiz89/1lakh.csv'])
 
 # Properties modified on a1lakhcsv
 a1lakhcsv.HaveHeaders = 0
 a1lakhcsv.FieldDelimiterCharacters = ' '
 
-# Create a new 'SpreadSheet View'
-spreadSheetView2 = CreateView('SpreadSheetView')
-spreadSheetView2.ColumnToSort = ''
-spreadSheetView2.BlockSize = 1024L
+# get active view
+spreadSheetView2 = GetActiveViewOrCreate('SpreadSheetView')
 # uncomment following to set a specific view size
 # spreadSheetView2.ViewSize = [400, 400]
-
-# get layout
-layout1 = GetLayout()
-
-# place view in the layout
-layout1.AssignView(4, spreadSheetView2)
 
 # show data in view
 a1lakhcsvDisplay = Show(a1lakhcsv, spreadSheetView2)
@@ -59,10 +48,11 @@ glyph1.ScaleFactor = 0.75536
 glyph1.GlyphTransform = 'Transform2'
 
 # Properties modified on glyph1.GlyphType
-#glyph1.GlyphType.GlyphType = 'Vertex'
+glyph1.GlyphType.GlyphType = 'Vertex'
 
 # Properties modified on glyph1
 glyph1.GlyphType = '2D Glyph'
+glyph1.GlyphMode = 'All Points'
 
 # Properties modified on glyph1.GlyphType
 glyph1.GlyphType.GlyphType = 'Vertex'
@@ -71,21 +61,6 @@ glyph1.GlyphType.GlyphType = 'Vertex'
 glyph1Display = Show(glyph1, spreadSheetView2)
 # trace defaults for the display properties.
 glyph1Display.CompositeDataSetIndex = [0]
-
-# create a new 'Glyph'
-glyph2 = Glyph(Input=glyph1,
-    GlyphType='Arrow')
-glyph2.Scalars = ['POINTS', 'Field 3']
-glyph2.Vectors = ['POINTS', 'None']
-glyph2.ScaleFactor = 0.7527699947357178
-glyph2.GlyphTransform = 'Transform2'
-
-# set active source
-SetActiveSource(glyph1)
-
-# destroy glyph2
-Delete(glyph2)
-del glyph2
 
 # create a new 'D3'
 d31 = D3(Input=glyph1)
@@ -99,7 +74,7 @@ d31Display.CompositeDataSetIndex = [0]
 Hide(glyph1, spreadSheetView2)
 
 # save data
-SaveData('%s.pvtu' %FILENAME, proxy=d31, DataMode='Ascii')
+SaveData('/home/faiz89/finalTest.pvtu', proxy=d31, DataMode='Ascii')
 
 #### uncomment the following to render all views
 # RenderAllViews()
