@@ -15,15 +15,15 @@ reader.HaveHeaders = 0
 reader.FieldDelimiterCharacters = ' '
 
 # get active view
-spreadSheetView2 = GetActiveViewOrCreate('SpreadSheetView')
+#spreadSheetView2 = GetActiveViewOrCreate('SpreadSheetView')
 # uncomment following to set a specific view size
 # spreadSheetView2.ViewSize = [400, 400]
 
 # show data in view
-readerDisplay = Show(reader, spreadSheetView2)
+#readerDisplay = Show(reader, spreadSheetView2)
 # trace defaults for the display properties.
-readerDisplay.FieldAssociation = 'Row Data'
-readerDisplay.CompositeDataSetIndex = [0]
+#readerDisplay.FieldAssociation = 'Row Data'
+#readerDisplay.CompositeDataSetIndex = [0]
 
 # create a new 'Table To Points'
 tableToPoints1 = TableToPoints(Input=reader)
@@ -36,12 +36,12 @@ tableToPoints1.YColumn = 'Field 1'
 tableToPoints1.ZColumn = 'Field 2'
 
 # show data in view
-tableToPoints1Display = Show(tableToPoints1, spreadSheetView2)
+#tableToPoints1Display = Show(tableToPoints1, spreadSheetView2)
 # trace defaults for the display properties.
-tableToPoints1Display.CompositeDataSetIndex = [0]
+#tableToPoints1Display.CompositeDataSetIndex = [0]
 
 # hide data in view
-Hide(reader, spreadSheetView2)
+#Hide(reader, spreadSheetView2)
 
 # create a new 'Glyph'
 glyph1 = Glyph(Input=tableToPoints1,
@@ -64,20 +64,20 @@ glyph1.GlyphType.GlyphType = 'Vertex'
 #glyph1.GlyphType.GlyphType = 'Vertex'
 
 # show data in view
-glyph1Display = Show(glyph1, spreadSheetView2)
+#glyph1Display = Show(glyph1, spreadSheetView2)
 # trace defaults for the display properties.
-glyph1Display.CompositeDataSetIndex = [0]
+#glyph1Display.CompositeDataSetIndex = [0]
 
 # create a new 'D3'
 d31 = D3(Input=glyph1)
 
 # show data in view
-d31Display = Show(d31, spreadSheetView2)
+#d31Display = Show(d31, spreadSheetView2)
 # trace defaults for the display properties.
-d31Display.CompositeDataSetIndex = [0]
+#d31Display.CompositeDataSetIndex = [0]
 
 # hide data in view
-Hide(glyph1, spreadSheetView2)
+#Hide(glyph1, spreadSheetView2)
 
 # save data
 SaveData('%s.pvtu' %FILENAME, proxy=d31, DataMode='Ascii')
