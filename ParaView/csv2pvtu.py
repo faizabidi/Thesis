@@ -45,7 +45,9 @@ Hide(reader, spreadSheetView2)
 
 # create a new 'Glyph'
 glyph1 = Glyph(Input=tableToPoints1,
-    GlyphType='Arrow')
+    GlyphType='2D Glyph')
+glyph1.GlyphType.GlyphType = 'Vertex'
+glyph1.GlyphMode = 'All Points'
 glyph1.Scalars = ['POINTS', 'Field 3']
 glyph1.Vectors = ['POINTS', 'None']
 glyph1.ScaleFactor = 0.75536
@@ -55,11 +57,11 @@ glyph1.GlyphTransform = 'Transform2'
 glyph1.GlyphType.GlyphType = 'Vertex'
 
 # Properties modified on glyph1
-glyph1.GlyphType = '2D Glyph'
-glyph1.GlyphMode = 'All Points'
+#glyph1.GlyphType = '2D Glyph'
+#glyph1.GlyphMode = 'All Points'
 
 # Properties modified on glyph1.GlyphType
-glyph1.GlyphType.GlyphType = 'Vertex'
+#glyph1.GlyphType.GlyphType = 'Vertex'
 
 # show data in view
 glyph1Display = Show(glyph1, spreadSheetView2)
