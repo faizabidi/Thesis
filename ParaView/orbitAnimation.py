@@ -1,12 +1,14 @@
-#### import the simple module from the paraview
 from paraview.simple import *
-#### disable automatic camera reset on 'Show'
+import time
+
+t0 = time.time()
+
 paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'XML Partitioned Unstructured Grid Reader'
-test1pvtu = XMLPartitionedUnstructuredGridReader(FileName=['/home/faiz89/Paraview-D3/test1.pvtu'])
-test1pvtu.CellArrayStatus = ['vtkOriginalCellIds', 'vtkGhostLevels']
-test1pvtu.PointArrayStatus = ['Field 3', 'vtkGhostLevels', '___D3___GlobalNodeIds']
+reader = XMLPartitionedUnstructuredGridReader(FileName=['/home/faiz89/Paraview-D3/test1.pvtu'])
+reader.CellArrayStatus = ['vtkOriginalCellIds', 'vtkGhostLevels']
+reader.PointArrayStatus = ['Field 3', 'vtkGhostLevels', '___D3___GlobalNodeIds']
 
 # get active view
 renderView1 = GetActiveViewOrCreate('RenderView')
@@ -14,21 +16,25 @@ renderView1 = GetActiveViewOrCreate('RenderView')
 # renderView1.ViewSize = [1205, 806]
 
 # show data in view
-test1pvtuDisplay = Show(test1pvtu, renderView1)
+readerDisplay = Show(reader, renderView1)
+
+print time.time() - t0
+print "Model loaded!"
+
 # trace defaults for the display properties.
-test1pvtuDisplay.ColorArrayName = [None, '']
-test1pvtuDisplay.OSPRayScaleArray = 'Field 3'
-test1pvtuDisplay.OSPRayScaleFunction = 'PiecewiseFunction'
-test1pvtuDisplay.SelectOrientationVectors = 'Field 3'
-test1pvtuDisplay.ScaleFactor = 0.14907
-test1pvtuDisplay.SelectScaleArray = 'Field 3'
-test1pvtuDisplay.GlyphType = 'Arrow'
-test1pvtuDisplay.ScalarOpacityUnitDistance = 1.084683438842873
-test1pvtuDisplay.GaussianRadius = 0.074535
-test1pvtuDisplay.SetScaleArray = ['POINTS', 'Field 3']
-test1pvtuDisplay.ScaleTransferFunction = 'PiecewiseFunction'
-test1pvtuDisplay.OpacityArray = ['POINTS', 'Field 3']
-test1pvtuDisplay.OpacityTransferFunction = 'PiecewiseFunction'
+readerDisplay.ColorArrayName = [None, '']
+readerDisplay.OSPRayScaleArray = 'Field 3'
+readerDisplay.OSPRayScaleFunction = 'PiecewiseFunction'
+readerDisplay.SelectOrientationVectors = 'Field 3'
+readerDisplay.ScaleFactor = 0.14907
+readerDisplay.SelectScaleArray = 'Field 3'
+readerDisplay.GlyphType = 'Arrow'
+readerDisplay.ScalarOpacityUnitDistance = 1.084683438842873
+readerDisplay.GaussianRadius = 0.074535
+readerDisplay.SetScaleArray = ['POINTS', 'Field 3']
+readerDisplay.ScaleTransferFunction = 'PiecewiseFunction'
+readerDisplay.OpacityArray = ['POINTS', 'Field 3']
+readerDisplay.OpacityTransferFunction = 'PiecewiseFunction'
 
 # reset view to fit data
 renderView1.ResetCamera()
@@ -64,6 +70,8 @@ animationScene1 = GetAnimationScene()
 # Properties modified on animationScene1
 animationScene1.NumberOfFrames = 1000
 
+t1 = time.time()
+
 animationScene1.Play()
 
 #### saving camera placements for all active views
@@ -72,6 +80,9 @@ animationScene1.Play()
 renderView1.CameraPosition = [-3.481400000000002, 0.6225, 3.438839999999999]
 renderView1.CameraFocalPoint = [-3.4814, 0.6225, -0.75205]
 renderView1.CameraParallelScale = 1.084683438842873
+
+print time.time() - t1
+print "Animation complete!"
 
 #### uncomment the following to render all views
 # RenderAllViews()
