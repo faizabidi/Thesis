@@ -5,7 +5,7 @@ from paraview.simple import *
 script, FILENAME = sys.argv
 
 #### disable automatic camera reset on 'Show'
-paraview.simple._DisableFirstRenderCameraReset()
+#paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'CSV Reader'
 reader = CSVReader(FileName=[FILENAME])
@@ -28,12 +28,12 @@ reader.FieldDelimiterCharacters = ' '
 # create a new 'Table To Points'
 tableToPoints1 = TableToPoints(Input=reader)
 tableToPoints1.XColumn = 'Field 0'
-tableToPoints1.YColumn = 'Field 0'
-tableToPoints1.ZColumn = 'Field 0'
-
-# Properties modified on tableToPoints1
 tableToPoints1.YColumn = 'Field 1'
 tableToPoints1.ZColumn = 'Field 2'
+
+# Properties modified on tableToPoints1
+#tableToPoints1.YColumn = 'Field 1'
+#tableToPoints1.ZColumn = 'Field 2'
 
 # show data in view
 #tableToPoints1Display = Show(tableToPoints1, spreadSheetView2)
@@ -50,11 +50,11 @@ glyph1.GlyphType.GlyphType = 'Vertex'
 glyph1.GlyphMode = 'All Points'
 glyph1.Scalars = ['POINTS', 'Field 3']
 glyph1.Vectors = ['POINTS', 'None']
-glyph1.ScaleFactor = 0.75536
+glyph1.ScaleFactor = 0.14907
 glyph1.GlyphTransform = 'Transform2'
 
 # Properties modified on glyph1.GlyphType
-glyph1.GlyphType.GlyphType = 'Vertex'
+#glyph1.GlyphType.GlyphType = 'Vertex'
 
 # Properties modified on glyph1
 #glyph1.GlyphType = '2D Glyph'
@@ -80,7 +80,7 @@ d31 = D3(Input=glyph1)
 #Hide(glyph1, spreadSheetView2)
 
 # save data
-SaveData('%s.pvtu' %FILENAME, proxy=d31, DataMode='Ascii')
+SaveData('%s.pvtu' %FILENAME, proxy=d31, DataMode='Binary')
 
 #### uncomment the following to render all views
 # RenderAllViews()
