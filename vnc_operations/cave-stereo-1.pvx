@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<pvx>
+	<Process Type="server">
+    <EyeSeparation Value="0.065"/> 
+    <Machine Name="LTL"
+		Environment="DISPLAY=:0.0"
+        Geometry="2560x1600+0+0"
+        LowerLeft="-1.524    -0.381  1.524"
+        LowerRight="-1.524   -0.381  -1.524"
+        UpperRight="-1.524   1.524   -1.524"/>
+	<Machine Name="LTR"
+		Environment="DISPLAY=:0.1"
+        Geometry="2560x1600+0+0"
+        LowerLeft="-1.524    -0.381  1.524"
+        LowerRight="-1.524   -0.381  -1.524"
+        UpperRight="-1.524   1.524   -1.524"/>
+
+        </Process>
+</pvx>

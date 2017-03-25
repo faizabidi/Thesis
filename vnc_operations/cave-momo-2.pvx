@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<pvx>
+    <Process Type="client" />
+    <Process Type="server">
+        
+    <Machine Name="CT"
+           Environment="DISPLAY=:0"
+           Geometry="2560x1600+0+0"
+           FullScreen="0"
+           ShowBorders="0"
+           LowerLeft="-1.524  -0.381  -1.524"
+           LowerRight="1.524    -0.381  -1.524"
+           UpperRight="1.524    1.524   -1.524"/>
+   
+   <Machine Name="CB"
+           Environment="DISPLAY=:0"
+           Geometry="2560x1600+0+0"
+           FullScreen="0"
+           ShowBorders="0"
+           LowerLeft="-1.524    -1.524  -1.524"
+           LowerRight="1.524    -1.524  -1.524"
+           UpperRight="1.524    0.381   -1.524"/>
+       
+        </Process>
+</pvx>
