@@ -1,12 +1,15 @@
 from paraview.simple import *
 import time
+import datetime 
 
 t0 = time.time()
+
+print "Start time = ", datetime.datetime.now().time()
 
 paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'XML Partitioned Unstructured Grid Reader'
-reader = XMLPartitionedUnstructuredGridReader(FileName=['/home/fabidi89/Data_Thesis/50Million/50million_8files/50million.pvtu'])
+reader = XMLPartitionedUnstructuredGridReader(FileName=['/home/faiz89/Data_Thesis/Data_Thesis/1Lakh/1Lakh_8files/1lakh.pvtu'])
 reader.CellArrayStatus = ['vtkOriginalCellIds', 'vtkGhostType']
 reader.PointArrayStatus = ['Field 3', 'vtkGhostType', '___D3___GlobalNodeIds']
 
@@ -20,9 +23,6 @@ field3LUT = GetColorTransferFunction('Field3')
 
 # show data in view
 readerDisplay = Show(reader, renderView1)
-
-loading_time = time.time() - t0
-print "Time to load = ", loading_time
 
 # trace defaults for the display properties.
 readerDisplay.ColorArrayName = ['POINTS', 'Field 3']
@@ -48,6 +48,9 @@ readerDisplay.SetScalarBarVisibility(renderView1, True)
 
 # get opacity transfer function/opacity map for 'Field3'
 field3PWF = GetOpacityTransferFunction('Field3')
+
+loading_time = time.time() - t0
+print "Time to load = ", loading_time
 
 # get camera animation track for the view
 cameraAnimationCue1 = GetCameraTrack(view=renderView1)
@@ -100,7 +103,7 @@ print "Animation complete in ", render_time, " seconds"
 print "Frame rate = ", float(1000)/float(render_time)
 
 # save animation images/movie
-WriteAnimation('/home/fabidi89/git/Thesis/ParaView/8Files/orbit/Animation/frame.png', Magnification=1, FrameRate=15.0, Compression=True)
+WriteAnimation('/home/faiz89/Data_Thesis/Data_Thesis/1Lakh/1Lakh_8files/Animation/frame.png', Magnification=1, FrameRate=15.0, Compression=True)
 
 #### saving camera placements for all active views
 
@@ -108,6 +111,8 @@ WriteAnimation('/home/fabidi89/git/Thesis/ParaView/8Files/orbit/Animation/frame.
 renderView1.CameraPosition = [-3.481399999999997, 0.6225, 3.4388500000000004]
 renderView1.CameraFocalPoint = [-3.4814, 0.6225, -0.75205]
 renderView1.CameraParallelScale = 1.0846835112836455
+
+print "End time = ", datetime.datetime.now().time()
 
 #### uncomment the following to render all views
 # RenderAllViews()
