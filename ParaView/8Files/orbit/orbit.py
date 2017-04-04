@@ -50,9 +50,11 @@ readerDisplay.SetScalarBarVisibility(renderView1, True)
 field3PWF = GetOpacityTransferFunction('Field3')
 
 # current camera placement for renderView1
-renderView1.CameraPosition = [-3.481399999999997, 0.6225, 3.4388500000000004]
-renderView1.CameraFocalPoint = [-3.4814, 0.6225, -0.75205]
-renderView1.CameraParallelScale = 1.0846835112836455
+renderView1.CameraPosition = [-159.39646822936845, 7.677948951721191, 0.7153501510620117]
+renderView1.CameraFocalPoint = [-2.8989505767822266, 7.677948951721191, 0.7153501510620117]
+renderView1.CameraViewUp = [0.0, 0.0, 1.0]
+renderView1.CameraParallelScale = 40.504538079757246
+
 
 loading_time = time.time() - t0
 print "Time to load = ", loading_time
