@@ -9,7 +9,7 @@ print "Start time = ", datetime.datetime.now().time()
 paraview.simple._DisableFirstRenderCameraReset()
 
 # create a new 'XML Partitioned Unstructured Grid Reader'
-reader = XMLPartitionedUnstructuredGridReader(FileName=['/home/fabidi89/Data_Thesis/50Million/50_100/50_100_million.pvtu'])
+reader = XMLPartitionedUnstructuredGridReader(FileName=['/home/fabidi89/Data_Thesis/50Million/50_100/16/50_100_million.pvtu'])
 reader.CellArrayStatus = ['vtkOriginalCellIds', 'vtkGhostType']
 reader.PointArrayStatus = ['Field 3', 'vtkGhostType', '___D3___GlobalNodeIds']
 
